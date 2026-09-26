@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dart Networks Pvt. Ltd. | Next-Gen Enterprise Technology Solutions</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter & Fira Code -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            400: '#38bdf8',
+                            500: '#0066ff', // Signature Dart Blue
+                            600: '#0052cc',
+                            700: '#003d99',
+                            900: '#030712',
+                            accent: '#00f0ff'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #030712;
+            color: #f3f4f6;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        /* Custom Glowing & Grid Effects */
+        .tech-grid {
+            background-image: radial-gradient(rgba(0, 102, 255, 0.15) 1px, transparent 0);
+            background-size: 32px 32px;
+        }
+        .glow-blue {
+            box-shadow: 0 0 25px rgba(0, 102, 255, 0.35);
+        }
+        .glow-accent {
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.25);
+        }
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card {
+            background: rgba(17, 24, 39, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            border-color: rgba(0, 102, 255, 0.5);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px -10px rgba(0, 102, 255, 0.3);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #ffffff 0%, #a5f3fc 50%, #0066ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="tech-grid antialiased">
+
+    <!-- Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-gray-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Custom Circular 'A' Logo & Brand Title -->
+            <a href="#hero" class="flex items-center gap-3.5 group">
+                <div class="relative flex items-center justify-center w-11 h-11 rounded-full bg-gradient-to-tr from-brand-600 via-brand-500 to-brand-accent p-[2px] shadow-lg group-hover:scale-105 transition-transform duration-300">
+                    <div class="w-full h-full bg-slate-950 rounded-full flex items-center justify-center">
+                        <span class="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-blue-400 font-sans tracking-tighter">A</span>
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-xl font-extrabold tracking-wider text-white flex items-center">
+                        DART<span class="text-brand-500 ml-1">NETWORKS</span>
+                    </span>
+                    <span class="text-[9px] uppercase tracking-[0.25em] text-gray-400 font-mono -mt-1">Pvt. Ltd.</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <a href="#about" class="text-gray-300 hover:text-brand-accent transition-colors">About Us</a>
+                <a href="#services" class="text-gray-300 hover:text-brand-accent transition-colors">Services</a>
+                <a href="#solutions" class="text-gray-300 hover:text-brand-accent transition-colors">Solutions</a>
+                <a href="#architecture" class="text-gray-300 hover:text-brand-accent transition-colors">Architect Spec</a>
+                <a href="#partners" class="text-gray-300 hover:text-brand-accent transition-colors">Partners</a>
+            </nav>
+
+            <div class="hidden md:flex items-center gap-4">
+                <a href="#contact" class="px-5 py-2.5 rounded-lg bg-brand-500 hover:bg-brand-600 text-white font-semibold text-sm transition-all duration-300 shadow-lg shadow-brand-500/25 flex items-center gap-2">
+                    <span>Contact Us</span>
+                    <i class="fa-solid me-1 fa-arrow-right text-xs"></i>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button id="menuBtn" class="md:hidden text-gray-300 hover:text-white text-2xl focus:outline-none p-2" aria-label="Toggle Navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobileMenu" class="hidden md:hidden glass-panel border-b border-gray-800 px-6 py-6 flex-col space-y-4 text-base font-medium">
+            <a href="#about" class="mobile-link text-gray-300 hover:text-brand-accent">About Us</a>
+            <a href="#services" class="mobile-link text-gray-300 hover:text-brand-accent">Services</a>
+            <a href="#solutions" class="mobile-link text-gray-300 hover:text-brand-accent">Solutions</a>
+            <a href="#architecture" class="mobile-link text-gray-300 hover:text-brand-accent">Architect Spec</a>
+            <a href="#partners" class="mobile-link text-gray-300 hover:text-brand-accent">Partners</a>
+            <a href="#contact" class="mobile-link px-4 py-2.5 rounded-lg bg-brand-500 text-white text-center font-semibold">Get in Touch</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative pt-36 pb-20 md:pt-48 md:pb-32 overflow-hidden">
+        <!-- Background Glow Orbs -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-500/15 rounded-full blur-[140px] pointer-events-none"></div>
+        <div class="absolute top-1/3 right-10 w-72 h-72 bg-brand-accent/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/30 text-brand-accent text-xs font-mono mb-8 uppercase tracking-widest">
+                <span class="w-2 h-2 rounded-full bg-brand-accent animate-pulse"></span>
+                Next-Gen ICT & ELV System Integrators
+            </div>
+            
+            <h1 class="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white max-w-5xl mx-auto leading-tight mb-8">
+                Architecting Intelligent <br class="hidden sm:inline">
+                <span class="gradient-text">Enterprise Networks & ELV</span> Infrastructure
+            </h1>
+            
+            <p class="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto font-normal leading-relaxed mb-10">
+                Dart Networks Pvt. Ltd. delivers end-to-end extra-low voltage (ELV), structured cabling, enterprise cybersecurity, physical access control, and unified smart automation across mission-critical facilities.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+                <a href="#solutions" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-bold text-base transition-all shadow-lg shadow-brand-500/30 flex items-center justify-center gap-3">
+                    Explore Solutions
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <a href="#architecture" class="w-full sm:w-auto px-8 py-4 rounded-xl glass-card hover:bg-gray-800/80 text-gray-200 font-semibold text-base border border-gray-700 flex items-center justify-center gap-3">
+                    <i class="fa-solid fa-microchip text-brand-accent"></i>
+                    Architecture Tool
+                </a>
+            </div>
+
+            <!-- Key Enterprise Metrics -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
+                <div class="glass-card p-6 rounded-2xl text-center">
+                    <p class="text-3xl sm:text-4xl font-extrabold text-white font-mono mb-1">99.99%</p>
+                    <p class="text-xs uppercase tracking-wider text-gray-400">Network Uptime SLA</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl text-center">
+                    <p class="text-3xl sm:text-4xl font-extrabold text-brand-accent font-mono mb-1">500+</p>
+                    <p class="text-xs uppercase tracking-wider text-gray-400">Turnkey Deployments</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl text-center">
+                    <p class="text-3xl sm:text-4xl font-extrabold text-brand-400 font-mono mb-1">24/7/365</p>
+                    <p class="text-xs uppercase tracking-wider text-gray-400">NOC & SOC Monitoring</p>
+                </div>
+                <div class="glass-card p-6 rounded-2xl text-center">
+                    <p class="text-3xl sm:text-4xl font-extrabold text-white font-mono mb-1">ISO</p>
+                    <p class="text-xs uppercase tracking-wider text-gray-400">Certified Quality</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="py-24 relative border-t border-gray-800/60 bg-slate-950/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-brand-500/10 text-brand-accent text-xs font-mono mb-4 uppercase">
+                        Who We Are
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white mb-6">
+                        Empowering Enterprise Digital Transformation Through Superior Systems Integration
+                    </h2>
+                    <p class="text-gray-300 leading-relaxed mb-6">
+                        At <strong class="text-white">Dart Networks Pvt. Ltd.</strong>, we specialize in high-availability ICT infrastructure, extra-low voltage (ELV) solutions, dynamic audio-visual environments, and enterprise physical security.
+                    </p>
+                    <p class="text-gray-400 leading-relaxed mb-8">
+                        Taking inspiration from global engineering benchmarks like SEC Group and ELV, we combine robust design, precision engineering, and proactive maintenance to power data centers, commercial hubs, industrial zones, and government facilities.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="flex items-start gap-3 p-3 rounded-lg bg-gray-900/50 border border-gray-800">
+                            <i class="fa-solid fa-shield-halved text-brand-500 text-xl mt-1"></i>
+                            <div>
+                                <h4 class="text-white font-semibold text-sm">Enterprise Security</h4>
+                                <p class="text-xs text-gray-400">Integrated CCTV, AI analytics & access control.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 rounded-lg bg-gray-900/50 border border-gray-800">
+                            <i class="fa-solid fa-network-wired text-brand-accent text-xl mt-1"></i>
+                            <div>
+                                <h4 class="text-white font-semibold text-sm">Structured Cabling</h4>
+                                <p class="text-xs text-gray-400">Cat6A, Fiber Optic backbone & OT networks.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Strategic Capabilities Card Display -->
+                <div class="relative">
+                    <div class="glass-panel p-8 rounded-3xl border border-gray-800 shadow-2xl relative overflow-hidden">
+                        <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-brand-500/20 rounded-full blur-3xl pointer-events-none"></div>
+                        <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                            <i class="fa-solid fa-sliders text-brand-accent"></i> Core Capabilities
+                        </h3>
+                        
+                        <div class="space-y-4">
+                            <div class="p-4 rounded-xl bg-gray-900/80 border border-gray-800 hover:border-brand-500/40 transition-colors">
+                                <span class="text-xs font-mono text-brand-accent block mb-1">01 / CONSULTING & DESIGN</span>
+                                <p class="text-white font-medium">BIM 3D modeling, low-voltage schematic drafting, and technical feasibility audits.</p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-gray-900/80 border border-gray-800 hover:border-brand-500/40 transition-colors">
+                                <span class="text-xs font-mono text-brand-accent block mb-1">02 / TURNKEY IMPLEMENTATION</span>
+                                <p class="text-white font-medium">Full procurement, rack integration, cabling certified up to 40G standards.</p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-gray-900/80 border border-gray-800 hover:border-brand-500/40 transition-colors">
+                                <span class="text-xs font-mono text-brand-accent block mb-1">03 / MANAGED SERVICES</span>
+                                <p class="text-white font-medium">Annual Maintenance Contracts (AMC), SLA support, and active network health monitoring.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section with Filter Tabs -->
+    <section id="services" class="py-24 relative border-t border-gray-800/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-brand-accent font-mono text-xs uppercase tracking-widest bg-brand-500/10 px-3 py-1 rounded-full">Engineering Services</span>
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-white mt-4 mb-4">Comprehensive ICT & ELV Spectrum</h2>
+                <p class="text-gray-400">Tailored low-voltage solutions engineered for resilience, scalable bandwidth, and robust security.</p>
+            </div>
+
+            <!-- Service Category Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-2 mb-12" id="filterContainer">
+                <button onclick="filterServices('all')" class="filter-btn active px-5 py-2.5 rounded-lg text-sm font-semibold transition-all bg-brand-500 text-white shadow-lg">All Services</button>
+                <button onclick="filterServices('elv')" class="filter-btn px-5 py-2.5 rounded-lg text-sm font-semibold transition-all bg-gray-900 text-gray-400 hover:text-white hover:bg-gray-800">ELV Systems</button>
+                <button onclick="filterServices('networking')" class="filter-btn px-5 py-2.5 rounded-lg text-sm font-semibold transition-all bg-gray-900 text-gray-400 hover:text-white hover:bg-gray-800">Network & IT</button>
+                <button onclick="filterServices('security')" class="filter-btn px-5 py-2.5 rounded-lg text-sm font-semibold transition-all bg-gray-900 text-gray-400 hover:text-white hover:bg-gray-800">Security & Surveillance</button>
+                <button onclick="filterServices('av')" class="filter-btn px-5 py-2.5 rounded-lg text-sm font-semibold transition-all bg-gray-900 text-gray-400 hover:text-white hover:bg-gray-800">AV & Automation</button>
+            </div>
+
+            <!-- Services Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="servicesGrid">
+                
+                <!-- Service 1 -->
+                <div class="service-card glass-card p-8 rounded-2xl" data-category="networking">
+                    <div class="w-14 h-14 rounded-xl bg-brand-500/10 border border-brand-500/30 flex items-center justify-center text-brand-accent text-2xl mb-6">
+                        <i class="fa-solid fa-diagram-project"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Structured Cabling & Fiber</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">Cat6A/Cat7 copper cabling and single-mode/multi-mode high-speed fiber backbone installations with certified OTDR testing.</p>
+                    <ul class="text-xs text-gray-400 space-y-2 font-mono">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-500"></i> Cable Tray & Conduit Layout</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-500"></i> Fluke Patch Testing Certified</li>
+                    </ul>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="service-card glass-card p-8 rounded-2xl" data-category="security">
+                    <div class="w-14 h-14 rounded-xl bg-brand-500/10 border border-brand-500/30 flex items-center justify-center text-brand-accent text-2xl mb-6">
+                        <i class="fa-solid fa-video"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">IP Surveillance & Analytics</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">High-definition IP CCTV networks paired with AI-driven video analytics including facial recognition and perimeter intrusion setup.</p>
+                    <ul class="text-xs text-gray-400 space-y-2 font-mono">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-500"></i> ANPR & Thermal Imaging</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-500"></i> Centralized VMS Integration</li>
+                    </ul>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="service-card glass-card p-8 rounded-2xl" data-category="security">
+                    <div class="w-14 h-14 rounded-xl bg-brand-500/10 border border-brand-500/30 flex items-center justify-center text-brand-accent text-2xl mb-6">
+                        <i class="fa-solid fa-fingerprint"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Biometric Access Control</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">Multifactor access control including facial recognition, RFID, turnstiles, and smart barrier gates for facilities.</p>
+                    <ul class="text-xs text-gray-400 space-y-2 font-mono">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-500"></i> Time & Attendance Software</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-500"></i> Flap Barriers & Bollards</li>
+                    </ul>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="service-card glass-card p-8 rounded-2xl" data-category="elv">
+                    <div class="w-14 h-14 rounded-xl bg-brand-500/10 border border-brand-500/30 flex items-center justify-center text-brand-accent text-2xl mb-6">
+                        <i class="fa-solid fa-fire-extinguisher"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Fire Alarm & Detection</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">Addressable fire alarm systems, smoke aspiration (VESDA), and public address voice evacuation systems compliant with NFPA standard.</p>
+                    <ul class="text-xs text-gray-400 space-y-2 font-mono">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-500"></i> Addressable Control Panels</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-500"></i> Voice Evacuation (PA/VA)</li>
+                    </ul>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="service-card glass-card p-8 rounded-2xl" data-category="av">
+                    <div class="w-14 h-14 rounded-xl bg-brand-500/10 border border-brand-500/30 flex items-center justify-center text-brand-accent text-2xl mb-6">
+                        <i class="fa-solid fa-desktop"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Enterprise AV & Video Walls</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">Smart boardrooms, seamless LED video walls, acoustic sound systems, and automated control interfaces for modern workspaces.</p>
+                    <ul class="text-xs text-gray-400 space-y-2 font-mono">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-500"></i> Video Conferencing Rooms</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-500"></i> Centralized Touch Controls</li>
+                    </ul>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="service-card glass-card p-8 rounded-2xl" data-category="networking">
+                    <div class="w-14 h-14 rounded-xl bg-brand-500/10 border border-brand-500/30 flex items-center justify-center text-brand-accent text-2xl mb-6">
+                        <i class="fa-solid fa-server"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Data Center Infrastructure</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">Smart server rack integration, precision cooling, containment, UPS systems, and environmental monitoring sensor nodes.</p>
+                    <ul class="text-xs text-gray-400 space-y-2 font-mono">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-500"></i> Hot/Cold Aisle Containment</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-500"></i> Smart PDU & Climate Sensors</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Solutions Showcase -->
+    <section id="solutions" class="py-24 relative border-t border-gray-800/60 bg-slate-950/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-500 font-mono text-xs uppercase tracking-widest bg-brand-500/10 px-3 py-1 rounded-full">Industry Vertical Solutions</span>
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-white mt-4 mb-4">Turnkey Industry Deployments</h2>
+                <p class="text-gray-400">Custom tailored technological ecosystems engineered for performance across sector-specific environments.</p>
+            </div>
+
+            <!-- Solution Navigation Tabs -->
+            <div class="flex flex-wrap border-b border-gray-800 justify-center gap-4 sm:gap-8 mb-12">
+                <button onclick="switchSolution('corporate')" id="tab-corporate" class="sol-tab text-white border-b-2 border-brand-500 pb-4 font-semibold text-sm sm:text-base transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-building text-brand-accent"></i> Corporate Headquarters
+                </button>
+                <button onclick="switchSolution('industrial')" id="tab-industrial" class="sol-tab text-gray-400 border-b-2 border-transparent hover:text-white pb-4 font-semibold text-sm sm:text-base transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-industry"></i> Industrial & Logistics
+                </button>
+                <button onclick="switchSolution('hospitality')" id="tab-hospitality" class="sol-tab text-gray-400 border-b-2 border-transparent hover:text-white pb-4 font-semibold text-sm sm:text-base transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-hotel"></i> Hospitality & Healthcare
+                </button>
+            </div>
+
+            <!-- Tab Content Display -->
+            <div class="glass-panel rounded-3xl p-8 sm:p-12 border border-gray-800">
+                
+                <!-- Corporate Content -->
+                <div id="content-corporate" class="sol-content grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <span class="text-xs font-mono text-brand-accent uppercase tracking-widest block mb-2">Smart Workspaces</span>
+                        <h3 class="text-2xl sm:text-3xl font-bold text-white mb-4">High-Density Wireless & Collaborative Rooms</h3>
+                        <p class="text-gray-300 leading-relaxed mb-6">
+                            Modern enterprises require reliable Wi-Fi 6E connectivity, seamless hybrid meeting setups, and intelligent visitor management to keep hybrid teams productive and secure.
+                        </p>
+                        <div class="space-y-3 font-mono text-sm text-gray-300">
+                            <div class="flex items-center gap-3">
+                                <div class="w-2 h-2 rounded-full bg-brand-accent"></div>
+                                <span>Zero-trust network access & guest portal isolation</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-2 h-2 rounded-full bg-brand-accent"></div>
+                                <span>Acoustic beamforming conference room audio</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-2 h-2 rounded-full bg-brand-accent"></div>
+                                <span>Centralized desk booking & occupancy sensors</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-900 rounded-2xl p-6 border border-gray-800 font-mono text-xs text-gray-300 shadow-inner">
+                        <div class="flex items-center justify-between border-b border-gray-800 pb-3 mb-4">
+                            <span class="text-brand-accent font-bold"><i class="fa-solid fa-terminal mr-2"></i>DEPLOYMENT_SPEC.json</span>
+                            <span class="text-gray-500">v4.2</span>
+                        </div>
+                        <pre class="overflow-x-auto text-brand-100">
+{
+  "topology": "Spine-and-Leaf High Availability",
+  "wireless_density": "Wi-Fi 6E Multi-Gigabit APs",
+  "security_tier": "802.1X Dynamic VLAN Assignment",
+  "redundancy": "Dual Fiber Ring Backbone",
+  "av_protocol": "Dante Audio over IP / NVX Video"
+}
+                        </pre>
+                    </div>
+                </div>
+
+                <!-- Industrial Content -->
+                <div id="content-industrial" class="sol-content hidden grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <span class="text-xs font-mono text-brand-accent uppercase tracking-widest block mb-2">Ruggedized Infrastructure</span>
+                        <h3 class="text-2xl sm:text-3xl font-bold text-white mb-4">Harsh Environment OT & CCTV Networks</h3>
+                        <p class="text-gray-300 leading-relaxed mb-6">
+                            Factories and logistics parks require rugged switches, explosion-proof cameras, wide-coverage long-range wireless backhauls, and perimeter fence intrusion sensors.
+                        </p>
+                        <div class="space-y-3 font-mono text-sm text-gray-300">
+                            <div class="flex items-center gap-3">
+                                <div class="w-2 h-2 rounded-full bg-brand-500"></div>
+                                <span>IP67 rated outdoor enclosures & fiber switches</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-2 h-2 rounded-full bg-brand-500"></div>
+                                <span>Long-range microwave point-to-point links</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-2 h-2 rounded-full bg-brand-500"></div>
+                                <span>Automated ANPR gate barriers for logistics trucks</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-900 rounded-2xl p-6 border border-gray-800 font-mono text-xs text-gray-300 shadow-inner">
+                        <div class="flex items-center justify-between border-b border-gray-800 pb-3 mb-4">
+                            <span class="text-brand-500 font-bold"><i class="fa-solid fa-terminal mr-2"></i>INDUSTRIAL_SPEC.json</span>
+                            <span class="text-gray-500">v2.1</span>
+                        </div>
+                        <pre class="overflow-x-auto text-brand-100">
+{
+  "cabling_type": "Armored Tactical Fiber Optic",
+  "operating_temp": "-40°C to +75°C Industrial Grade",
+  "perimeter": "Thermal CCTV with Radar Tracking",
+  "scada_isolation": "Air-Gapped OT Network Architecture"
+}
+                        </pre>
+                    </div>
+                </div>
+
+                <!-- Hospitality Content -->
+                <div id="content-hospitality" class="sol-content hidden grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <span class="text-xs font-mono text-brand-accent uppercase tracking-widest block mb-2">Guest & Patient Care</span>
+                        <h3 class="text-2xl sm:text-3xl font-bold text-white mb-4">High-Speed In-Room AV & IP Nurse Call</h3>
+                        <p class="text-gray-300 leading-relaxed mb-6">
+                            Delivering IPTV, room automation, nurse-call emergency communication systems, and high-speed Wi-Fi designed to handle intense peak bandwidth demand.
+                        </p>
+                        <div class="space-y-3 font-mono text-sm text-gray-300">
+                            <div class="flex items-center gap-3">
+                                <div class="w-2 h-2 rounded-full bg-brand-accent"></div>
+                                <span>Interactive Guest IPTV and OTT Streaming Systems</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-2 h-2 rounded-full bg-brand-accent"></div>
+                                <span>IP Nurse Call Buttons & Corridor Light Indicators</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-2 h-2 rounded-full bg-brand-accent"></div>
+                                <span>Keyless RFID & BLE Mobile Access Door Locks</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-900 rounded-2xl p-6 border border-gray-800 font-mono text-xs text-gray-300 shadow-inner">
+                        <div class="flex items-center justify-between border-b border-gray-800 pb-3 mb-4">
+                            <span class="text-brand-accent font-bold"><i class="fa-solid fa-terminal mr-2"></i>HOSPITALITY_SPEC.json</span>
+                            <span class="text-gray-500">v3.0</span>
+                        </div>
+                        <pre class="overflow-x-auto text-brand-100">
+{
+  "in_room_ap": "Wall-Plate Wi-Fi 6 with Gigabit Ports",
+  "nurse_call": "HL7 Integrated IP Messaging System",
+  "lock_integration": "BLE Smart Locks with PMS Sync",
+  "tv_headend": "Centralized IP Multicast Channels"
+}
+                        </pre>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Architecture Estimator Tool -->
+    <section id="architecture" class="py-24 relative border-t border-gray-800/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-accent font-mono text-xs uppercase tracking-widest bg-brand-500/10 px-3 py-1 rounded-full">Interactive Utility</span>
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-white mt-4 mb-4">Infrastructure Estimator</h2>
+                <p class="text-gray-400">Configure your facility parameters to get an instant estimated BOQ & technical architectural specification.</p>
+            </div>
+
+            <div class="glass-panel rounded-3xl p-8 sm:p-12 border border-gray-800">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Controls -->
+                    <div class="space-y-6 lg:col-span-1">
+                        <div>
+                            <label class="block text-sm font-semibold text-white mb-2">Facility Area (Sq. Ft.)</label>
+                            <input type="range" id="sqftSlider" min="5000" max="100000" step="5000" value="25000" oninput="updateEstimator()" class="w-full accent-brand-500 cursor-pointer">
+                            <div class="flex justify-between text-xs font-mono text-gray-400 mt-1">
+                                <span>5,000</span>
+                                <span id="sqftVal" class="text-brand-accent font-bold">25,000 Sq. Ft.</span>
+                                <span>100,000+</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-white mb-2">Total Floors / Levels</label>
+                            <select id="floorSelect" onchange="updateEstimator()" class="w-full bg-gray-900 border border-gray-700 text-white rounded-lg p-3 text-sm focus:border-brand-500 focus:outline-none">
+                                <option value="1">Single Floor Layout</option>
+                                <option value="3" selected>3 Floors (Standard Office Building)</option>
+                                <option value="6">6 Floors (Mid-rise Tower)</option>
+                                <option value="12">12+ Floors (High-rise Tower)</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-white mb-2">Required Modules</label>
+                            <div class="space-y-2 text-sm text-gray-300">
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="checkbox" id="modCCTV" checked onchange="updateEstimator()" class="accent-brand-500 rounded"> IP CCTV Surveillance
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="checkbox" id="modAccess" checked onchange="updateEstimator()" class="accent-brand-500 rounded"> Biometric Access Control
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="checkbox" id="modWifi" checked onchange="updateEstimator()" class="accent-brand-500 rounded"> Enterprise High-Density Wi-Fi
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Live Calculated Estimate Display -->
+                    <div class="lg:col-span-2 bg-gray-900/90 rounded-2xl p-6 sm:p-8 border border-gray-800 font-mono flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-center border-b border-gray-800 pb-4 mb-6">
+                                <span class="text-xs uppercase text-brand-accent tracking-widest font-bold">Recommended Architecture BOQ</span>
+                                <span class="text-xs text-gray-400">Dynamic Calculation</span>
+                            </div>
+
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+                                <div class="bg-slate-950 p-4 rounded-xl border border-gray-800 text-center">
+                                    <span class="text-xs text-gray-400 block mb-1">CCTV Cameras</span>
+                                    <span id="resCCTV" class="text-2xl font-bold text-white">25</span>
+                                </div>
+                                <div class="bg-slate-950 p-4 rounded-xl border border-gray-800 text-center">
+                                    <span class="text-xs text-gray-400 block mb-1">Wi-Fi APs</span>
+                                    <span id="resWifi" class="text-2xl font-bold text-brand-accent">13</span>
+                                </div>
+                                <div class="bg-slate-950 p-4 rounded-xl border border-gray-800 text-center">
+                                    <span class="text-xs text-gray-400 block mb-1">Access Doors</span>
+                                    <span id="resAccess" class="text-2xl font-bold text-white">9</span>
+                                </div>
+                                <div class="bg-slate-950 p-4 rounded-xl border border-gray-800 text-center">
+                                    <span class="text-xs text-gray-400 block mb-1">Switch Rack Units</span>
+                                    <span id="resRacks" class="text-2xl font-bold text-brand-400">2 Racks</span>
+                                </div>
+                            </div>
+
+                            <div class="space-y-2 text-xs text-gray-400">
+                                <p class="flex justify-between"><span>Estimated Network Fiber Drops:</span> <strong id="resDrops" class="text-white">125 Drops</strong></p>
+                                <p class="flex justify-between"><span>Suggested Switch Capacity:</span> <strong id="resSwitches" class="text-white">6x 24-Port PoE+ Managed Switches</strong></p>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 pt-6 border-t border-gray-800 flex flex-col sm:flex-row justify-between items-center gap-4">
+                            <span class="text-xs text-gray-400">Ready to convert this estimation into an engineering drawing?</span>
+                            <a href="#contact" class="px-6 py-2.5 rounded-lg bg-brand-500 hover:bg-brand-600 text-white font-sans text-sm font-semibold transition-all">Request Formal Proposal</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Strategic Technology OEM Partners -->
+    <section id="partners" class="py-20 border-t border-gray-800/60 bg-slate-950/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-center text-xs font-mono uppercase text-gray-500 tracking-widest mb-10">Authorized Integration Partners & Certified OEMs</p>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-8 items-center justify-center opacity-70 grayscale hover:grayscale-0 transition-all duration-300">
+                <div class="glass-card p-4 rounded-xl text-center font-extrabold text-gray-300 tracking-wider">CISCO</div>
+                <div class="glass-card p-4 rounded-xl text-center font-extrabold text-gray-300 tracking-wider">SCHNEIDER</div>
+                <div class="glass-card p-4 rounded-xl text-center font-extrabold text-gray-300 tracking-wider">HONEYWELL</div>
+                <div class="glass-card p-4 rounded-xl text-center font-extrabold text-gray-300 tracking-wider">HIKVISION</div>
+                <div class="glass-card p-4 rounded-xl text-center font-extrabold text-gray-300 tracking-wider">COMMSCOPE</div>
+                <div class="glass-card p-4 rounded-xl text-center font-extrabold text-gray-300 tracking-wider">ARUBA</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 relative border-t border-gray-800/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div>
+                    <span class="text-brand-accent font-mono text-xs uppercase tracking-widest bg-brand-500/10 px-3 py-1 rounded-full">Get In Touch</span>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold text-white mt-4 mb-6">Let's Build Your Infrastructure</h2>
+                    <p class="text-gray-400 mb-8 leading-relaxed">
+                        Have an upcoming project, RFP, or system upgrade requirement? Speak directly with our lead solution engineers.
+                    </p>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/30 flex items-center justify-center text-brand-accent text-xl shrink-0">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold">Corporate Office</h4>
+                                <p class="text-gray-400 text-sm">Dart Networks Pvt. Ltd.<br>Tech Infrastructure Towers, Cyber Hub Phase II</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/30 flex items-center justify-center text-brand-accent text-xl shrink-0">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold">Email Enquiries</h4>
+                                <p class="text-gray-400 text-sm">info@dartnetworks.in | projects@dartnetworks.in</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/30 flex items-center justify-center text-brand-accent text-xl shrink-0">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold">Hotline</h4>
+                                <p class="text-gray-400 text-sm">+91 (0) 11 4000 8900 / 24x7 Support: 1800-DART-NET</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="glass-panel p-8 sm:p-10 rounded-3xl border border-gray-800">
+                    <form id="contactForm" onsubmit="handleFormSubmit(event)" class="space-y-5">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-xs font-mono text-gray-300 uppercase mb-2">Full Name *</label>
+                                <input type="text" required placeholder="John Doe" class="w-full bg-gray-900 border border-gray-800 rounded-lg p-3 text-sm text-white focus:border-brand-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-mono text-gray-300 uppercase mb-2">Work Email *</label>
+                                <input type="email" required placeholder="john@company.com" class="w-full bg-gray-900 border border-gray-800 rounded-lg p-3 text-sm text-white focus:border-brand-500 focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-xs font-mono text-gray-300 uppercase mb-2">Phone Number</label>
+                                <input type="tel" placeholder="+91 98765 43210" class="w-full bg-gray-900 border border-gray-800 rounded-lg p-3 text-sm text-white focus:border-brand-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-mono text-gray-300 uppercase mb-2">Project Type</label>
+                                <select class="w-full bg-gray-900 border border-gray-800 rounded-lg p-3 text-sm text-white focus:border-brand-500 focus:outline-none">
+                                    <option>Structured Cabling / Fiber</option>
+                                    <option>IP CCTV & Physical Security</option>
+                                    <option>Full Turnkey ELV Infrastructure</option>
+                                    <option>Boardroom AV & Smart Automation</option>
+                                    <option>AMC / Managed Network Support</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-mono text-gray-300 uppercase mb-2">Project Brief / Scope</label>
+                            <textarea rows="4" required placeholder="Describe your site details, square footage, or specific equipment preferences..." class="w-full bg-gray-900 border border-gray-800 rounded-lg p-3 text-sm text-white focus:border-brand-500 focus:outline-none"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-4 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-bold text-base transition-all shadow-lg shadow-brand-500/30 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            Submit RFQ Request
+                        </button>
+
+                        <div id="formSuccessMessage" class="hidden p-4 rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-sm text-center font-mono">
+                            <i class="fa-solid fa-circle-check mr-2"></i> Inquiry submitted successfully! Our engineer will reach out within 2 hours.
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800/80 bg-slate-950 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <!-- Custom Circular 'A' Logo in Footer -->
+                <a href="#hero" class="flex items-center gap-3 group">
+                    <div class="relative flex items-center justify-center w-9 h-9 rounded-full bg-gradient-to-tr from-brand-600 via-brand-500 to-brand-accent p-[2px]">
+                        <div class="w-full h-full bg-slate-950 rounded-full flex items-center justify-center">
+                            <span class="text-xl font-black text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-blue-400 font-sans tracking-tighter">A</span>
+                        </div>
+                    </div>
+                    <span class="text-lg font-bold text-white tracking-wider">
+                        DART<span class="text-brand-500 ml-1">NETWORKS</span>
+                    </span>
+                </a>
+
+                <p class="text-xs text-gray-500 font-mono text-center">
+                    © 2026 Dart Networks Pvt. Ltd. All rights reserved. Next-Gen Enterprise ICT & ELV Integration.
+                </p>
+
+                <div class="flex items-center space-x-6 text-gray-400">
+                    <a href="#" class="hover:text-brand-accent transition-colors"><i class="fa-brands fa-linkedin text-lg"></i></a>
+                    <a href="#" class="hover:text-brand-accent transition-colors"><i class="fa-brands fa-twitter text-lg"></i></a>
+                    <a href="#" class="hover:text-brand-accent transition-colors"><i class="fa-brands fa-facebook text-lg"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Mobile Navigation Toggle
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+        });
+
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('flex');
+            });
+        });
+
+        // Service Filter Logic
+        function filterServices(category) {
+            const cards = document.querySelectorAll('.service-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-brand-500', 'text-white', 'shadow-lg', 'active');
+                btn.classList.add('bg-gray-900', 'text-gray-400');
+            });
+
+            event.target.classList.remove('bg-gray-900', 'text-gray-400');
+            event.target.classList.add('bg-brand-500', 'text-white', 'shadow-lg', 'active');
+
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Solutions Tab Switching
+        function switchSolution(solKey) {
+            document.querySelectorAll('.sol-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            document.querySelectorAll('.sol-tab').forEach(tab => {
+                tab.classList.remove('text-white', 'border-brand-500');
+                tab.classList.add('text-gray-400', 'border-transparent');
+            });
+
+            document.getElementById(`content-${solKey}`).classList.remove('hidden');
+            
+            const activeTab = document.getElementById(`tab-${solKey}`);
+            activeTab.classList.remove('text-gray-400', 'border-transparent');
+            activeTab.classList.add('text-white', 'border-brand-500');
+        }
+
+        // Dynamic Infrastructure Estimator Tool Logic
+        function updateEstimator() {
+            const sqft = parseInt(document.getElementById('sqftSlider').value);
+            const floors = parseInt(document.getElementById('floorSelect').value);
+            
+            const hasCCTV = document.getElementById('modCCTV').checked;
+            const hasAccess = document.getElementById('modAccess').checked;
+            const hasWifi = document.getElementById('modWifi').checked;
+
+            document.getElementById('sqftVal').innerText = `${sqft.toLocaleString()} Sq. Ft.`;
+
+            // Estimator Calculations
+            const cctvCount = hasCCTV ? Math.round((sqft / 1000) * (1 + floors * 0.1)) : 0;
+            const wifiCount = hasWifi ? Math.round((sqft / 2000) * (1 + floors * 0.05)) : 0;
+            const accessCount = hasAccess ? Math.round((sqft / 3000) * floors) : 0;
+            
+            const totalDrops = (cctvCount) + (wifiCount * 2) + (accessCount * 2) + Math.round(sqft / 300);
+            const switchUnits = Math.ceil(totalDrops / 24);
+            const rackCount = Math.ceil(floors / 3);
+
+            document.getElementById('resCCTV').innerText = cctvCount;
+            document.getElementById('resWifi').innerText = wifiCount;
+            document.getElementById('resAccess').innerText = accessCount;
+            document.getElementById('resRacks').innerText = `${rackCount} Rack(s)`;
+            document.getElementById('resDrops').innerText = `${totalDrops} Drops (Cat6A)`;
+            document.getElementById('resSwitches').innerText = `${switchUnits}x 24-Port Managed PoE+ Switches`;
+        }
+
+        // Contact Form Handler
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const msg = document.getElementById('formSuccessMessage');
+            msg.classList.remove('hidden');
+            e.target.reset();
+            setTimeout(() => {
+                msg.classList.add('hidden');
+            }, 5000);
+        }
+
+        // Initial setup
+        updateEstimator();
+    </script>
+</body>
+</html>
